@@ -23,7 +23,8 @@ body{
 }
 .row{
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  
 }
 
 .tile{
@@ -46,9 +47,22 @@ body{
   flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
-  width:100%;
+  width:1000px;
 }
 #keyboard button{
-  background-color: white;
-  
+  background-color: #818384;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 12px 8px;
+  flex-grow: 1;
+  width:40px;
+  height:50px;
+  font-size: 0.9rem;
+  transition: background-color 0.1s;
+}
+#keyboard button:hover{
+  background-color: #939598;
 }
