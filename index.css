@@ -1,11 +1,11 @@
 /* --- Global & Container Styles --- */
 body {
-    background-color: #121213; /* Dark background like original Wordle */
+    background-color: #121213;
     color: white;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center; /* Center everything horizontally */
-    align-items: flex-start; /* Start elements from the top */
+    justify-content: center;
+    align-items: flex-start;
     min-height: 100vh;
     margin: 0;
     padding-top: 20px;
@@ -16,40 +16,39 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 500px; /* Max width for the whole game */
+    max-width: 550px; /* SLIGHTLY WIDER for better keyboard fit */
     width: 100%;
 }
 
-/* --- Tile Grid Styles --- */
+/* --- Tile Grid Styles (Unchanged) --- */
 #tile-grid {
     display: grid;
-    grid-template-rows: repeat(6, 1fr); /* 6 rows */
-    gap: 5px; /* Spacing between rows and tiles */
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px;
     width: 100%;
-    max-width: 350px; /* Optimal width for the 5x6 grid */
-    margin-bottom: 50px; /* Space between tiles and keyboard */
+    max-width: 350px;
+    margin-bottom: 50px;
 }
 
 .tile-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns/tiles per row */
+    grid-template-columns: repeat(5, 1fr);
     gap: 5px;
 }
 
 .tile {
     width: 100%;
-    /* Create a square tile: padding-top: 100% makes the height equal to the width */
-    padding-top: 100%; 
+    padding-top: 100%;
     position: relative;
     background-color: transparent;
-    border: 2px solid #3a3a3c; /* Default dark border */
+    border: 2px solid #3a3a3c;
     font-size: 32px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
 .tile::before {
-    content: attr(data-letter); /* Display letter from a data attribute (set by JS) */
+    content: attr(data-letter);
     position: absolute;
     top: 0;
     left: 0;
@@ -60,68 +59,46 @@ body {
     align-items: center;
 }
 
-/* Tile Status Colors (The same classes used for keys can be used here) */
+.tile.filled { border-color: #565758; }
+.tile.correct { background-color: #538d4e; border-color: #538d4e; color: white; }
+.tile.present { background-color: #b59f3b; border-color: #b59f3b; color: white; }
+.tile.absent { background-color: #3a3a3c; border-color: #3a3a3c; color: white; }
 
-/* Tile has been guessed but has no letter yet */
-.tile.filled {
-    border-color: #565758;
-}
 
-/* Correct Letter, Correct Spot (Green) */
-.tile.correct {
-    background-color: #538d4e;
-    border-color: #538d4e;
-    color: white;
-}
-
-/* Correct Letter, Wrong Spot (Yellow) */
-.tile.present {
-    background-color: #b59f3b;
-    border-color: #b59f3b;
-    color: white;
-}
-
-/* Letter is not in the word (Dark Gray) */
-.tile.absent {
-    background-color: #3a3a3c;
-    border-color: #3a3a3c;
-    color: white;
-}
-
-/* --- Keyboard Styles (Your existing styles, slightly modified for flow) --- */
+/* --- Keyboard Styles (Increased Size) --- */
 #keyboard-container {
     width: 100%;
-    padding: 10px 0; /* Remove side padding, keep keyboard centered */
-    max-width: 500px;
+    padding: 10px 0;
+    max-width: 550px; /* Matches the game container max-width */
     box-sizing: border-box;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px; /* Increased row spacing */
 }
 
 .middle-row {
-    padding: 0 20px;
+    padding: 0 30px; /* Increased padding for middle row to keep the shift */
 }
 
 .key {
     background-color: #818384; 
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px; /* Slightly rounder corners */
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    margin: 0 3px; 
-    height: 58px;
+    margin: 0 4px; /* Increased spacing between keys */
+    height: 75px; /* **LARGER KEY HEIGHT** (was 58px) */
     flex-grow: 1;
-    max-width: 43px; 
+    max-width: 55px; /* **LARGER KEY WIDTH** (was 43px) */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 16px; /* **LARGER FONT SIZE** (was 14px) */
     transition: background-color 0.2s;
 }
 
@@ -130,9 +107,9 @@ body {
 }
 
 .large-key {
-    flex-grow: 1.5; 
-    max-width: 65px;
-    font-size: 12px;
+    flex-grow: 1.8; /* **WIDER ACTION KEYS** (was 1.5) */
+    max-width: 80px; /* **LARGER ACTION KEY WIDTH** (was 65px) */
+    font-size: 16px; /* Slightly larger font for action keys */
 }
 
 /* Wordle Status Colors (Key Styles) */
