@@ -66,3 +66,22 @@ body{
 #keyboard button:hover{
   background-color: #939598;
 }
+
+
+#navbar {
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #3a3a3c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#navbar h1 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  color: white;
+  margin: 0;
+}

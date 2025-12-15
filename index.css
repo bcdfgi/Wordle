@@ -4,11 +4,10 @@ body {
     color: white;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column; /* Stacks navbar and game container vertically */
+    align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding-top: 20px;
     box-sizing: border-box;
 }
 
@@ -16,11 +15,32 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 550px; /* SLIGHTLY WIDER for better keyboard fit */
+    max-width: 550px;
     width: 100%;
+
+    padding-top: 20px;
 }
 
-/* --- Tile Grid Styles (Unchanged) --- */
+
+#navbar {
+    width: 100%;
+
+    padding: 50px 0;
+    border-bottom: 1px solid #3a3a3c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    color: white;
+    margin: 0;
+}
+
+/* --- Tile Grid Styles --- */
 #tile-grid {
     display: grid;
     grid-template-rows: repeat(6, 1fr);
@@ -65,40 +85,39 @@ body {
 .tile.absent { background-color: #3a3a3c; border-color: #3a3a3c; color: white; }
 
 
-/* --- Keyboard Styles (Increased Size) --- */
 #keyboard-container {
     width: 100%;
     padding: 10px 0;
-    max-width: 550px; /* Matches the game container max-width */
+    max-width: 550px;
     box-sizing: border-box;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px; /* Increased row spacing */
+    margin-bottom: 10px;
 }
 
 .middle-row {
-    padding: 0 30px; /* Increased padding for middle row to keep the shift */
+    padding: 0 30px;
 }
 
 .key {
-    background-color: #818384; 
+    background-color: #818384;
     color: white;
     border: none;
-    border-radius: 6px; /* Slightly rounder corners */
+    border-radius: 6px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    margin: 0 4px; /* Increased spacing between keys */
-    height: 75px; /* **LARGER KEY HEIGHT** (was 58px) */
+    margin: 0 4px;
+    height: 65px;
     flex-grow: 1;
-    max-width: 55px; /* **LARGER KEY WIDTH** (was 43px) */
+    max-width: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px; /* **LARGER FONT SIZE** (was 14px) */
+    font-size: 16px;
     transition: background-color 0.2s;
 }
 
@@ -107,12 +126,11 @@ body {
 }
 
 .large-key {
-    flex-grow: 1.8; /* **WIDER ACTION KEYS** (was 1.5) */
-    max-width: 80px; /* **LARGER ACTION KEY WIDTH** (was 65px) */
-    font-size: 16px; /* Slightly larger font for action keys */
+    flex-grow: 1.8;
+    max-width: 80px;
+    font-size: 14px;
 }
 
-/* Wordle Status Colors (Key Styles) */
 .key.correct { background-color: #538d4e; }
 .key.present { background-color: #b59f3b; }
 .key.absent { background-color: #3a3a3c; }
