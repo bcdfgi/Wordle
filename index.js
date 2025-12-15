@@ -1,3 +1,29 @@
+let gameReady = false;
+let WORD_DICTIONARY = new Set();
+let secretWord = "";
+
+fetch("dictionary.txt")
+    .then(res => res.text())
+    .then(text => {
+        text.split("\n").forEach(word => {
+            if (word.trim().length === 5) {
+                WORD_DICTIONARY.add(word.trim().toLowerCase());
+            }
+        });
+
+        pickSecretWord();
+        gameReady = true;
+    });
+
+
+
+function pickSecretWord() {
+    const words = Array.from(WORD_DICTIONARY);
+    secretWord = words[Math.floor(Math.random() * words.length)];
+    console.log("Secret word:", secretWord);
+}
+
+
 const rows = document.querySelectorAll('.tile-row');
 let currentRow = 0;
 let currentTile = 0;
@@ -52,29 +78,78 @@ keys.forEach(key => {
         }
     });
 });
-
 function submitRow() {
+
+    if (!gameReady) return;
 
     if (currentTile < 5) return;
 
-    // TODO: later you can add word validation here
+
+    let guess = "";
+    const tiles = rows[currentRow].children;
+
+    for (let tile of tiles) {
+        guess += tile.dataset.letter;
+    }
+
+
+    if (!WORD_DICTIONARY.has(guess)) {
+        alert("Not in word list");
+        return;
+    }
+
+
+    const result = checkGuess(guess);
+
+
+    for (let i = 0; i < 5; i++) {
+        tiles[i].classList.add(result[i]);
+    }
+
+
+    if (guess === secretWord) {
+        alert("You guessed it!");
+        gameReady = false;
+        return;
+    }
+
 
     currentRow++;
     currentTile = 0;
 
 
     if (currentRow >= rows.length) {
-        currentRow = rows.length - 1;
+        alert(`Game over! Word was: ${secretWord}`);
+        gameReady = false;
     }
 }
-let WORD_DICTIONARY = new Set();
 
-fetch("words.txt")
-    .then(res => res.text())
-    .then(text => {
-        text.split("\n").forEach(word => {
-            WORD_DICTIONARY.add(word.trim());
-        });
-    });
+
+
+function checkGuess(guess) {
+    const result = Array(5).fill("absent");
+    const secretLetters = secretWord.split("");
+
+    // Pass 1: Correct letters
+    for (let i = 0; i < 5; i++) {
+        if (guess[i] === secretLetters[i]) {
+            result[i] = "correct";
+            secretLetters[i] = null;
+        }
+    }
+
+
+    for (let i = 0; i < 5; i++) {
+        if (result[i] === "correct") continue;
+
+        const index = secretLetters.indexOf(guess[i]);
+        if (index !== -1) {
+            result[i] = "present";
+            secretLetters[index] = null;
+        }
+    }
+
+    return result;
+}
 
 
