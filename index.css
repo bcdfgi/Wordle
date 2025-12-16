@@ -134,3 +134,15 @@ body {
 .key.correct { background-color: #538d4e; }
 .key.present { background-color: #b59f3b; }
 .key.absent { background-color: #3a3a3c; }
+
+.box{
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    background-color: transparent;
+    border: 2px solid #3a3a3c;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
