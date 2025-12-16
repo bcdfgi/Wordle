@@ -15,16 +15,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 550px;
     width: 100%;
-
     padding-top: 20px;
 }
 
 
 #navbar {
     width: 100%;
-
     padding: 50px 0;
     border-bottom: 1px solid #3a3a3c;
     display: flex;
@@ -47,13 +44,15 @@ body {
     gap: 5px;
     width: 100%;
     max-width: 350px;
+    height: 350px;
     margin-bottom: 50px;
 }
 
 .tile-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+    gap:2px;
+    padding-bottom: 2px;
 }
 
 .tile {
@@ -88,8 +87,8 @@ body {
 #keyboard-container {
     width: 100%;
     padding: 10px 0;
-    max-width: 550px;
     box-sizing: border-box;
+
 }
 
 .keyboard-row {
@@ -111,9 +110,9 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     margin: 0 4px;
-    height: 65px;
+    height: 100px;
     flex-grow: 1;
-    max-width: 48px;
+    max-width: 65px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -136,13 +135,13 @@ body {
 .key.absent { background-color: #3a3a3c; }
 
 .box{
-    width: 100%;
-    padding-top: 100%;
-    position: relative;
+    width: 52px;
+    height: 52px;
     background-color: transparent;
     border: 2px solid #3a3a3c;
     font-size: 32px;
     font-weight: bold;
     color: white;
+    text-align: center;
     text-transform: uppercase;
 }
