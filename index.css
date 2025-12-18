@@ -22,7 +22,7 @@ body {
 
 #navbar {
     width: 100%;
-    padding: 50px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #3a3a3c;
     display: flex;
     justify-content: center;
@@ -30,7 +30,8 @@ body {
 }
 
 #navbar h1 {
-    font-size: 36px;
+    font-family: Barlow Condensed, sans-serif;
+    font-size: 50px;
     font-weight: 700;
     letter-spacing: 0.2rem;
     color: white;
@@ -134,7 +135,7 @@ body {
 .key.present { background-color: #b59f3b; }
 .key.absent { background-color: #3a3a3c; }
 
-.box{
+.box {
     width: 52px;
     height: 52px;
     background-color: transparent;
@@ -146,4 +147,54 @@ body {
     text-transform: uppercase;
     caret-color: transparent;
     pointer-events: none;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
+.flip {
+    animation: flip 0.6s ease forwards;
+}
+.shake{
+    animation: shake 0.6s ease forwards;
+}
+@keyframes shake {
+    0%   { transform: translateX(0); }
+    10%  { transform: translateX(-6px); }
+    20%  { transform: translateX(6px); }
+    30%  { transform: translateX(-6px); }
+    40%  { transform: translateX(6px); }
+    50%  { transform: translateX(-4px); }
+    60%  { transform: translateX(4px); }
+    70%  { transform: translateX(-2px); }
+    80%  { transform: translateX(2px); }
+    90%  { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+.box.correct {
+    background-color: #538d4e;
+    border-color: #538d4e;
+}
+
+.box.present {
+    background-color: #b59f3b;
+    border-color: #b59f3b;
+}
+
+.box.absent {
+    background-color: #3a3a3c;
+    border-color: #3a3a3c;
+}
+
+

@@ -4,6 +4,7 @@ let currentString="";
 let word="";
 let currentBox=1;
 let max=2308
+let dict;
 
 //Function that randomly reads a word from the 'wordles.json'.
 RandomWord();
@@ -27,11 +28,15 @@ for(let i=65; i<=90;i++){
 function RandomWord() {
     fetch('./wordles.json')
         .then(response => response.json())
-        .then(words => {
-            console.log(words);
+        .then((temp)=>{
+            dict=temp;
+            for(let i=0;i<dict.length;i++){
+                dict[i]=dict[i].toUpperCase();
+            }
+            console.log(dict);
             const randomIndex=Math.floor(Math.random()*(max+1));
             console.log(randomIndex);
-            word=words[randomIndex].toUpperCase();
+            word=dict[randomIndex];
             console.log(word);
         })
         .catch(err => console.error(err));
@@ -108,10 +113,37 @@ function getUserInput(){
     check();
 }
 
+//Checks if the user types word is in the Dictionary
+function checkInDict(){
+    for(let i=0;i<dict.length;i++){
+        if(currentString===dict[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
 //Check logic and colors the right box.
 function check(){
     if(currentString.length!==5){
         currentString="";
+        return;
+    }
+
+    let isCurrentStringinDict=checkInDict();
+
+    if(isCurrentStringinDict===false){
+        currentString="";
+        for(let i= 5*(attempt-1)+1;i<=5*attempt;i++){
+            let box=document.getElementById(`box${i}`);
+            box.classList.add('shake');
+
+            box.addEventListener('animationend',()=>{
+                box.classList.remove('shake');
+            },{once:true});
+        }
+
+
         return;
     }
 
@@ -123,15 +155,22 @@ function check(){
         let result=match(currentString[i],i);
 
         let box=document.getElementById(`box${5*(attempt-1)+1+i}`);
+
         let key=document.getElementById(currentString[i]);
+
+
         if(result==="correct"){
+            box.classList.add('flip');
             box.style.backgroundColor="#538d4e";
             key.style.backgroundColor="#538d4e";
+
         }else if(result==="present" ){
+            box.classList.add('flip');
             box.style.backgroundColor="#b59f3b";
             key.style.backgroundColor="#b59f3b";
         }
-        else{
+        else if(result==="absent"){
+            box.classList.add('flip');
             box.style.backgroundColor="#3a3a3c";
             key.style.backgroundColor="#3a3a3c";
         }
