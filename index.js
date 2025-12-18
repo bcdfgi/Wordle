@@ -2,42 +2,65 @@
 let attempt=1;
 let currentString="";
 let word="APPLE";
-
-
-document.getElementById('box1').focus();
-
-readyBox();
+let currentBox=1;
 
 
 
-function readyBox(){
-    for (let i = 5*(attempt-1)+1; i <= 5*attempt; i++) {
-        document.getElementById(`box${i}`).addEventListener("keydown", function(event){
+document.addEventListener("keydown",handleKey);
 
-            if(event.key==="Enter"){
-                getUserInput();
-            }
+for(let i=65; i<=90;i++){
+    let letter=String.fromCharCode(i);
+    let key=document.getElementById(`${letter}`);
+    key.addEventListener("click",function(){
+        if(currentBox!==5*attempt+1){
+            document.getElementById(`box${currentBox}`).value=letter;
+            currentBox++;
+        }
+    });
+}
+
+function KeyboardEnter(){
+    getUserInput();
+}
 
 
-        })
-
-        document.getElementById(`box${i}`).addEventListener("keyup",function(event){
-            if(i!==5*attempt){
-                let Box=document.getElementById(`box${i}`);
-                if(Box.value.length>=Box.maxLength){
-                    document.getElementById(`box${i+1}`).focus();
-                }
-            }
-
-            if(event.key==="Backspace") {
-                if (i !== 5 * (attempt - 1) + 1 ) {
-                    document.getElementById(`box${i - 1}`).focus();
-                }
-            }
-        })
+function KeyboardBackspace() {
+    if(currentBox!==5*(attempt-1)+1){
+        document.getElementById(`box${currentBox}`).value='';
+        currentBox--;
+    }else if(currentBox===5*(attempt-1)+1){
+        document.getElementById(`box${currentBox}`).value='';
     }
 
 }
+
+
+function handleKey(event){
+    if(event.key==="Backspace"){
+        if(currentBox!==5*(attempt-1)+1){
+            document.getElementById(`box${currentBox}`).value='';
+            currentBox--;
+        }else if(currentBox===5*(attempt-1)+1){
+            document.getElementById(`box${currentBox}`).value='';
+        }
+        return;
+    }
+
+    if(event.key==="Enter"){
+        getUserInput();
+        return;
+    }
+
+    if(currentBox!==5*attempt+1){
+        if(/^[a-zA-Z]$/.test(event.key)){
+            document.getElementById(`box${currentBox}`).value = event.key.toUpperCase();
+            currentBox++;
+        }
+    }
+
+}
+
+
 
 function match(letter, index) {
     if (word[index] === letter) {
@@ -55,16 +78,18 @@ function match(letter, index) {
 
 
 function getUserInput(){
-
-    currentString = "";
     for (let i = 5*(attempt-1)+1; i <= 5*attempt; i++) {
         currentString+=document.getElementById(`box${i}`).value;
     }
+    check();
 
+}
+
+function check(){
     if(currentString.length!==5){
+        currentString="";
         return;
     }
-
 
     currentString=currentString.toUpperCase();
 
@@ -74,39 +99,29 @@ function getUserInput(){
         let result=match(currentString[i],i);
 
         let box=document.getElementById(`box${5*(attempt-1)+1+i}`);
+        let key=document.getElementById(currentString[i]);
         if(result==="correct"){
             box.style.backgroundColor="#538d4e";
-            let key=document.getElementById(currentString[i]);
             key.style.backgroundColor="#538d4e";
         }else if(result==="present" ){
             box.style.backgroundColor="#b59f3b";
-            let key=document.getElementById(currentString[i]);
             key.style.backgroundColor="#b59f3b";
         }
         else{
             box.style.backgroundColor="#3a3a3c";
-            let key=document.getElementById(currentString[i]);
             key.style.backgroundColor="#3a3a3c";
         }
 
-        box.readOnly=true;
     }
 
     if(currentString===word){
         return;
     }
-
     currentString="";
-    document.getElementById(`box${5*attempt+1}`).focus();
     attempt+=1;
-
-    for (let i = 5*(attempt-1)+1; i <= 5*attempt; i++) {
-       document.getElementById(`box${i}`).readOnly=false;
-    }
-
-    readyBox();
-
 }
+
+
 
 
 

@@ -144,4 +144,6 @@ body {
     color: white;
     text-align: center;
     text-transform: uppercase;
+    caret-color: transparent;
+    pointer-events: none;
 }
