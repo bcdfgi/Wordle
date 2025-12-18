@@ -1,6 +1,0 @@
-apple
-grape
-pearl
-chair
-brick
-smile
