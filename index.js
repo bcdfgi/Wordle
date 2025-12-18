@@ -1,9 +1,12 @@
 
 let attempt=1;
 let currentString="";
-let word="APPLE";
+let word="";
 let currentBox=1;
+let max=2308
 
+
+RandomWord();
 
 document.addEventListener("keydown",handleKey);
 
@@ -20,6 +23,19 @@ for(let i=65; i<=90;i++){
 
 function KeyboardEnter(){
     getUserInput();
+}
+
+function RandomWord() {
+    fetch('./wordles.json')
+        .then(response => response.json())
+        .then(words => {
+            console.log(words);
+            const randomIndex=Math.floor(Math.random()*(max+1));
+            console.log(randomIndex);
+            word=words[randomIndex].toUpperCase();
+            console.log(word);
+        })
+        .catch(err => console.error(err));
 }
 
 
