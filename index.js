@@ -5,7 +5,6 @@ let word="APPLE";
 let currentBox=1;
 
 
-
 document.addEventListener("keydown",handleKey);
 
 for(let i=65; i<=90;i++){
