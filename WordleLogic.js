@@ -1,15 +1,17 @@
-
+// Global Variables needed to run the logic
 let attempt=1;
 let currentString="";
 let word="";
 let currentBox=1;
 let max=2308
 
-
+//Function that randomly reads a word from the 'wordles.json'.
 RandomWord();
 
+//Reads keyboard input from the user and puts it in the right box
 document.addEventListener("keydown",handleKey);
 
+//Assigns the virtual keyboard buttons its function like clicking the button 'Q', lets the user type 'Q' in the box
 for(let i=65; i<=90;i++){
     let letter=String.fromCharCode(i);
     let key=document.getElementById(`${letter}`);
@@ -21,10 +23,7 @@ for(let i=65; i<=90;i++){
     });
 }
 
-function KeyboardEnter(){
-    getUserInput();
-}
-
+//Function that randomly reads a word from the 'wordles.json'.
 function RandomWord() {
     fetch('./wordles.json')
         .then(response => response.json())
@@ -39,6 +38,14 @@ function RandomWord() {
 }
 
 
+
+//Assigns the virtual Keyboard Enter button function
+function KeyboardEnter(){
+    getUserInput();
+}
+
+
+//Assigns the virtual Keyboard Backspace button function
 function KeyboardBackspace() {
     if(currentBox!==5*(attempt-1)+1){
         document.getElementById(`box${currentBox}`).value='';
@@ -49,7 +56,7 @@ function KeyboardBackspace() {
 
 }
 
-
+//Let the user typed input into the boxes
 function handleKey(event){
     if(event.key==="Backspace"){
         if(currentBox!==5*(attempt-1)+1){
@@ -76,7 +83,8 @@ function handleKey(event){
 }
 
 
-
+//Checks if the user typed letter is either correct in the positon, or present in the word but wrong positon
+//or is it absent from the word
 function match(letter, index) {
     if (word[index] === letter) {
         return "correct";
@@ -91,15 +99,16 @@ function match(letter, index) {
     return "absent";
 }
 
-
+//Gets the user typed word when pressed enter
 function getUserInput(){
     for (let i = 5*(attempt-1)+1; i <= 5*attempt; i++) {
         currentString+=document.getElementById(`box${i}`).value;
     }
+    //Checks the word whether its right or wrong
     check();
-
 }
 
+//Check logic and colors the right box.
 function check(){
     if(currentString.length!==5){
         currentString="";
