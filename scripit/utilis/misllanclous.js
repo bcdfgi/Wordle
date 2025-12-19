@@ -1,4 +1,4 @@
-import * as logic from "./WordleLogic.js";
+import * as logic from "../WordleLogic.js";
 
 export function currentBox_to_rowcolElement(){
     let data_row=Math.ceil(logic.currentBox/logic.col);

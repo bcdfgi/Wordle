@@ -1,5 +1,5 @@
 import {currentBox, attempt, getUserInput, setCurrentbox} from './WordleLogic.js';
-import {currentBox_to_rowcolElement} from "./misllanclous.js";
+import {currentBox_to_rowcolElement} from "./utilis/misllanclous.js";
 
 //Let the user typed input into the boxes
 export function handleKey(key){
