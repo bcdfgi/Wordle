@@ -15,7 +15,7 @@ export function setCurrentbox(int){
 
 //Function that randomly reads a word from the 'wordles.json'.
 export function RandomWord() {
-    fetch('./wordles.json')
+    fetch('./Dictionary/wordles.json')
         .then(response => response.json())
         .then((temp)=>{
             dict=temp;
