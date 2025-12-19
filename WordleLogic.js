@@ -1,31 +1,20 @@
 // Global Variables needed to run the logic
-let attempt=1;
+export let attempt=1;
 let currentString="";
 let word="";
-let currentBox=1;
+export let currentBox=1;
 let max=2308
 let dict;
+export let row=6;
+export let col=5;
 
-//Function that randomly reads a word from the 'wordles.json'.
-RandomWord();
-
-//Reads keyboard input from the user and puts it in the right box
-document.addEventListener("keydown",handleKey);
-
-//Assigns the virtual keyboard buttons its function like clicking the button 'Q', lets the user type 'Q' in the box
-for(let i=65; i<=90;i++){
-    let letter=String.fromCharCode(i);
-    let key=document.getElementById(`${letter}`);
-    key.addEventListener("click",function(){
-        if(currentBox!==5*attempt+1){
-            document.getElementById(`box${currentBox}`).value=letter;
-            currentBox++;
-        }
-    });
+//current box setter
+export function setCurrentbox(int){
+    currentBox=int;
 }
 
 //Function that randomly reads a word from the 'wordles.json'.
-function RandomWord() {
+export function RandomWord() {
     fetch('./wordles.json')
         .then(response => response.json())
         .then((temp)=>{
@@ -41,86 +30,13 @@ function RandomWord() {
         })
         .catch(err => console.error(err));
 }
-
-
-
-//Assigns the virtual Keyboard Enter button function
-function KeyboardEnter(){
-    getUserInput();
-}
-
-
-//Assigns the virtual Keyboard Backspace button function
-function KeyboardBackspace() {
-    if(currentBox!==5*(attempt-1)+1){
-        document.getElementById(`box${currentBox}`).value='';
-        currentBox--;
-    }else if(currentBox===5*(attempt-1)+1){
-        document.getElementById(`box${currentBox}`).value='';
-    }
-
-}
-
-//Let the user typed input into the boxes
-function handleKey(event){
-    if(event.key==="Backspace"){
-        if(currentBox!==5*(attempt-1)+1){
-            document.getElementById(`box${currentBox}`).value='';
-            currentBox--;
-        }else if(currentBox===5*(attempt-1)+1){
-            document.getElementById(`box${currentBox}`).value='';
-        }
-        return;
-    }
-
-    if(event.key==="Enter"){
-        getUserInput();
-        return;
-    }
-
-    if(currentBox!==5*attempt+1){
-        if(/^[a-zA-Z]$/.test(event.key)){
-            document.getElementById(`box${currentBox}`).value = event.key.toUpperCase();
-            currentBox++;
-        }
-    }
-
-}
-
-
-//Checks if the user typed letter is either correct in the positon, or present in the word but wrong positon
-//or is it absent from the word
-function match(letter, index) {
-    if (word[index] === letter) {
-        return "correct";
-    }
-
-    for (let i = 0; i < word.length; i++) {
-        if (word[i] === letter) {
-            return "present";
-        }
-    }
-
-    return "absent";
-}
-
 //Gets the user typed word when pressed enter
-function getUserInput(){
-    for (let i = 5*(attempt-1)+1; i <= 5*attempt; i++) {
-        currentString+=document.getElementById(`box${i}`).value;
+export function getUserInput(){
+    for (let i = 1; i <= 5; i++) {
+        currentString+=document.querySelector(`[data-row="${attempt}"][data-column="${i}"]`).value;
     }
     //Checks the word whether its right or wrong
     check();
-}
-
-//Checks if the user types word is in the Dictionary
-function checkInDict(){
-    for(let i=0;i<dict.length;i++){
-        if(currentString===dict[i]){
-            return true;
-        }
-    }
-    return false;
 }
 
 //Check logic and colors the right box.
@@ -134,8 +50,8 @@ function check(){
 
     if(isCurrentStringinDict===false){
         currentString="";
-        for(let i= 5*(attempt-1)+1;i<=5*attempt;i++){
-            let box=document.getElementById(`box${i}`);
+        for(let i=1;i<=5;i++){
+            let box=document.querySelector(`[data-row="${attempt}"][data-column="${i}"]`)
             box.classList.add('shake');
 
             box.addEventListener('animationend',()=>{
@@ -154,7 +70,7 @@ function check(){
     for(let i=0;i<currentString.length;i++){
         let result=match(currentString[i],i);
 
-        let box=document.getElementById(`box${5*(attempt-1)+1+i}`);
+        let box=document.querySelector(`[data-row="${attempt}"][data-column="${i+1}"]`);
 
         let key=document.getElementById(currentString[i]);
 
@@ -182,6 +98,32 @@ function check(){
     }
     currentString="";
     attempt+=1;
+}
+
+//Checks if the user types word is in the Dictionary
+function checkInDict(){
+    for(let i=0;i<dict.length;i++){
+        if(currentString===dict[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+//Checks if the user typed letter is either correct in the positon, or present in the word but wrong positon
+//or is it absent from the word
+function match(letter, index) {
+    if (word[index] === letter) {
+        return "correct";
+    }
+
+    for (let i = 0; i < word.length; i++) {
+        if (word[i] === letter) {
+            return "present";
+        }
+    }
+
+    return "absent";
 }
 
 
