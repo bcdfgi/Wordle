@@ -3,10 +3,66 @@ export let attempt=1;
 let currentString="";
 let word="";
 export let currentBox=1;
-let max=2308
 let dict;
-export let row=6;
-export let col=5;
+import {gameConfig} from './config.js';
+let row=gameConfig.rows ;
+let col=gameConfig.columns ;
+const closeButton = document.querySelectorAll(".close-button");
+const modal = document.getElementById("modal");
+const overlay = document.getElementById("overlay");
+const modal2 = document.getElementById("modal2");
+const overlay2 = document.getElementById("overlay2");
+
+
+function closePop() {
+    modal.classList.remove("active");
+    modal.style.display = "none";
+    overlay.classList.remove("active");
+}
+
+closeButton.forEach(button => {
+    button.addEventListener("click", () => {
+        const modal = button.closest(".modal");
+
+        modal.classList.remove("active");
+        modal.style.display = "none";
+
+        if (modal.id === "modal") {
+            overlay.classList.remove("active");
+        }
+
+        if (modal.id === "modal2") {
+            overlay2.classList.remove("active");
+        }
+    });
+});
+
+overlay.addEventListener("click", closePop);
+overlay2.addEventListener("click", closeLostPop);
+
+function openPop() {
+    const modal = document.getElementById("modal");
+    const overlay = document.getElementById("overlay");
+
+    modal.classList.add("active");
+    modal.style.display = "block";
+    overlay.classList.add("active");
+}
+function openLostPop() {
+    modal2.classList.add("active");
+    modal2.style.display = "block";
+    overlay2.classList.add("active");
+}
+
+function closeLostPop() {
+    modal2.classList.remove("active");
+    modal2.style.display = "none";
+    overlay2.classList.remove("active");
+}
+
+
+
+
 
 //current box setter
 export function setCurrentbox(int){
@@ -15,24 +71,75 @@ export function setCurrentbox(int){
 
 //Function that randomly reads a word from the 'wordles.json'.
 export function RandomWord() {
-    fetch('./Dictionary/wordles.json')
-        .then(response => response.json())
-        .then((temp)=>{
-            dict=temp;
-            for(let i=0;i<dict.length;i++){
-                dict[i]=dict[i].toUpperCase();
-            }
-            console.log(dict);
-            const randomIndex=Math.floor(Math.random()*(max+1));
-            console.log(randomIndex);
-            word=dict[randomIndex];
-            console.log(word);
-        })
-        .catch(err => console.error(err));
+    if(col===3) {
+        fetch('./Dictionary/three-letter.json')
+            .then(response => response.json())
+            .then((temp) => {
+                dict = temp;
+                for (let i = 0; i < dict.length; i++) {
+                    dict[i] = dict[i].toUpperCase();
+                }
+                console.log(dict);
+                const randomIndex = Math.floor(Math.random() * (dict.length + 1));
+                console.log(randomIndex);
+                word = dict[randomIndex];
+                console.log(word);
+            })
+            .catch(err => console.error(err));
+    }else if(col===4) {
+        fetch('./Dictionary/four-letter.json')
+            .then(response => response.json())
+            .then((temp) => {
+                dict = temp;
+                for (let i = 0; i < dict.length; i++) {
+                    dict[i] = dict[i].toUpperCase();
+                }
+                console.log(dict);
+                const randomIndex = Math.floor(Math.random() * (dict.length + 1));
+                console.log(randomIndex);
+                word = dict[randomIndex];
+                console.log(word);
+            })
+            .catch(err => console.error(err));
+
+    }else if(col===5) {
+        fetch('./Dictionary/five-letter.json')
+            .then(response => response.json())
+            .then((temp) => {
+                dict = temp;
+                for (let i = 0; i < dict.length; i++) {
+                    dict[i] = dict[i].toUpperCase();
+                }
+                console.log(dict);
+                const randomIndex = Math.floor(Math.random() * (dict.length + 1));
+                console.log(randomIndex);
+                word = dict[randomIndex];
+                console.log(word);
+            })
+            .catch(err => console.error(err));
+    }else if(col===6) {
+        fetch('./Dictionary/six-letter.json')
+            .then(response => response.json())
+            .then((temp) => {
+                dict = temp;
+                for (let i = 0; i < dict.length; i++) {
+                    dict[i] = dict[i].toUpperCase();
+                }
+                console.log(dict);
+                const randomIndex = Math.floor(Math.random() * (dict.length + 1));
+                console.log(randomIndex);
+                word = dict[randomIndex];
+                console.log(word);
+            })
+            .catch(err => console.error(err));
+    }else{
+        console.error("Wrong number of words.");
+    }
+
 }
 //Gets the user typed word when pressed enter
 export function getUserInput(){
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= col; i++) {
         currentString+=document.querySelector(`[data-row="${attempt}"][data-column="${i}"]`).value;
     }
     //Checks the word whether its right or wrong
@@ -41,7 +148,7 @@ export function getUserInput(){
 
 //Check logic and colors the right box.
 function check(){
-    if(currentString.length!==5){
+    if(currentString.length!==col){
         currentString="";
         return;
     }
@@ -50,7 +157,7 @@ function check(){
 
     if(isCurrentStringinDict===false){
         currentString="";
-        for(let i=1;i<=5;i++){
+        for(let i=1;i<=col;i++){
             let box=document.querySelector(`[data-row="${attempt}"][data-column="${i}"]`)
             box.classList.add('shake');
 
@@ -94,10 +201,15 @@ function check(){
     }
 
     if(currentString===word){
+        openPop();
         return;
     }
     currentString="";
     attempt+=1;
+    if (attempt > row) {
+        openLostPop();
+    }
+
 }
 
 //Checks if the user types word is in the Dictionary

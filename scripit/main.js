@@ -1,17 +1,29 @@
 import * as logic from "./WordleLogic.js"
 import {handleKey} from "./Keyboard.js";
+import {gameConfig} from "./config.js";
+
 
 //Choosing a random word
 logic.RandomWord();
+console.log(gameConfig.rows);
+console.log(gameConfig.columns);
 
 //Generate the grid
 let grid=document.getElementById("grid")
-for(let r=1;r<=logic.row; r++) {
-    grid.innerHTML+=`<div class="row">`;
-    for(let c=1;c<=logic.col;c++){
-        grid.innerHTML+=`<input class="box" type="text" maxlength="1" data-row="${r}" data-column="${c}">`;
+grid.innerHTML = ""; // Clear previous content
+grid.style.gridTemplateColumns = `repeat(${gameConfig.columns}, 0fr)`;
+grid.style.gridTemplateRows = `repeat(${gameConfig.rows}, 1fr)`;
+for(let r=1;r<=gameConfig.rows; r++) {
+    for (let c = 1; c <= gameConfig.columns; c++) {
+        const input = document.createElement("input");
+        input.classList.add("box");
+        input.type = "text";
+        input.maxLength = 1;
+        input.dataset.row = String(r);
+        input.dataset.column = String(c);
+
+        grid.appendChild(input);
     }
-    grid.innerHTML+=`</div>`;
 }
 
 //Connects keyboard to the grid: so when user types the letter is put in the appropriate place
@@ -60,6 +72,9 @@ keyboardLayout.forEach((row,rowIndex)=>{
 
     keyboardContainer.appendChild(rowdiv);
 });
+
+
+
 
 
 

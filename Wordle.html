@@ -12,14 +12,40 @@
 <body>
 <header id="navbar">
     <h1> WORDLE </h1>
-
-
 </header>
 
 <div id="game-container">
     <div id="grid"></div>
     <div id="keyboard-container"></div>
 </div>
+
+<div class="modal" id="modal">
+    <div class="modal-header">
+        <div class="title">Winner</div>
+        <button class="close-button">&times;</button>
+
+    </div>
+    <div class="modal-body">
+        Congratulations you guessed the right answer.
+    </div>
+</div>
+<div id="overlay"></div>
+
+<div class="modal" id="modal2">
+    <div class="modal-header">
+        <div class="title">Lost</div>
+        <button class="close-button">&times;</button>
+
+    </div>
+    <div class="modal-body">
+        Sorry all the attempts are finished.
+    </div>
+</div>
+<div id="overlay2"></div>
+
+
+
+
 <script type="module" src="scripit/main.js"></script>
 </body>
 
