@@ -1,5 +1,4 @@
 
-
 let slider = document.getElementById('myRange');
 let output = document.getElementById('value');
 const modal = document.getElementById('modal3');
@@ -76,8 +75,8 @@ startButton.addEventListener('click', () => {
     }
     const rows = getRowsByDifficulty(selectedDifficulty);
 
-    sessionStorage.setItem('row', String(rows));
-    sessionStorage.setItem('col', selectedWordLength);
+    localStorage.setItem('row', String(rows));
+    localStorage.setItem('col', selectedWordLength);
     //sessionStorage.setItem('difficulty', selectedDifficulty);
 
     window.location.href = `Wordle.html`;

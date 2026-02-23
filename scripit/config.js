@@ -1,4 +1,4 @@
 export const gameConfig = {
-    columns: Number(sessionStorage.getItem('col')),
-    rows: Number(sessionStorage.getItem('row')),
+    columns: Number(localStorage.getItem('col')),
+    rows: Number(localStorage.getItem('row')),
 };
