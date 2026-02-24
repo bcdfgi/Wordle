@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles/global.css">
+    <title>Settings</title>
+</head>
+<body>
+<div id="settings-box">
+    <div class="settings">
+        <h1>Wordle</h1>
+        <div class ="sliderContainer">
+            <p><span id="value"></span>LETTERS</p>
+            <label for="myRange"></label><input type="range" min="3" max="6" value="3" step="1" id="myRange" class="slider" />
+            <div class="range-labels">
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+            </div>
+        </div>
+        <div class ="difficulty-box">
+            <div class="difficulty"></div>
+        </div>
+        <div class="start-box">
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal3">
+    <div class="modal-header">
+        <div class="title">Error</div>
+        <button class="close-button">&times;</button>
+
+    </div>
+    <div class="modal-body">
+        Please select a word length and difficulty!
+    </div>
+</div>
+<div id="overlay3"></div>
+
+</body>
+<script type="module" src="scripit/slider.js"></script>
+</html>
