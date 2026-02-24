@@ -351,7 +351,7 @@ function showNotification(title, message) {
 
     setTimeout(() => overlay.classList.add("active"), 10);
 
-    // YES → Restart the game with a new word
+    //  Restart the game with a new word
     modal.querySelector(".yes-button").addEventListener("click", () => {
         // Remove modal and overlay
         modal.remove();
@@ -375,7 +375,7 @@ function showNotification(title, message) {
         RandomWord();
     });
 
-    // NO → Conditional redirect based on login/guest
+    //  Conditional redirect based on login/guest
     modal.querySelector(".no-button").addEventListener("click", () => {
         const mode = localStorage.getItem("mode");
         const userId = localStorage.getItem("userId");

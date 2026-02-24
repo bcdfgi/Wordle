@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 function createUserProfile() {
     const sidebar = document.querySelector(".sidebar");
-    if (!sidebar) return; // Safety check
+    if (!sidebar) return;
 
     const email = localStorage.getItem("userEmail") || "user@example.com";
 
