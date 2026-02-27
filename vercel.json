@@ -1,13 +1,23 @@
 {
   "version": 2,
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/auth/:path*",
-      "destination": "/scripit/server.js"
+      "src": "scripit/server.js",
+      "use": "@vercel/node"
     },
     {
-      "source": "/api/game/:path*",
-      "destination": "/scripit/server.js"
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "styles/*.css",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "scripit/server.js"
     }
   ]
 }
