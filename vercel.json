@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/scripit/server.js"
+      "destination": "/router/auth.js"
     }
   ]
 }
