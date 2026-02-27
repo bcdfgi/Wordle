@@ -124,7 +124,10 @@ router.post('/google', async (req, res) => {
 
     } catch (err) {
         console.error(" Google verification error:", err);
-        res.status(401).json({ message: 'Invalid Google token' });
+        res.status(401).json({
+            message: 'Invalid Google token',
+            error: err.message || err.toString()
+        });
     }
 });
 
