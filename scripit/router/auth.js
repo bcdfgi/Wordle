@@ -237,6 +237,6 @@ router.get('/game/history/:userId', async (req, res) => {
 
 
 
-module.exports = application;
+module.exports = app;
 
 
