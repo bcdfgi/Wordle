@@ -74,7 +74,7 @@ router.get('/users', async (req, res) => {
 
 
 const client = new OAuth2Client(
-    '875738114512-171p73uqojdbmh33fkmv3n9ge1vncjdn.apps.googleusercontent.com'
+    'process.env.GOOGLE_CLIENT_ID',
 );
 
 router.post('/google', async (req, res) => {
@@ -88,7 +88,7 @@ router.post('/google', async (req, res) => {
     try {
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: '875738114512-171p73uqojdbmh33fkmv3n9ge1vncjdn.apps.googleusercontent.com'
+            audience: 'process.env.GOOGLE_CLIENT_ID'
         });
 
         const payload = ticket.getPayload();
