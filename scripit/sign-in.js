@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     google.accounts.id.initialize({
-        client_id: 'GOGGLE_CLIENT_ID',
+        client_id: '875738114512-171p73uqojdbmh33fkmv3n9ge1vncjdn.apps.googleusercontent.com',
         callback: handleGoogleSignIn,
         scope: "openid email profile"
     });
