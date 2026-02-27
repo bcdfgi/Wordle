@@ -2,7 +2,11 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/auth/:path*",
+      "destination": "/scripit/server.js"
+    },
+    {
+      "source": "/api/game/:path*",
       "destination": "/scripit/server.js"
     }
   ]
