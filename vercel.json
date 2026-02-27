@@ -2,8 +2,8 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/router/auth.js"
+      "source": "/api/:path*",
+      "destination": "/scripit/server.js"
     }
   ]
 }
