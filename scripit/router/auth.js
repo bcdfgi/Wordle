@@ -73,7 +73,7 @@ router.get('/users', async (req, res) => {
     }
 });
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client('875738114512-171p73uqojdbmh33fkmv3n9ge1vncjdn.apps.googleusercontent.com');
 
 router.post('/google', async (req, res) => {
     const { token } = req.body;
@@ -86,7 +86,7 @@ router.post('/google', async (req, res) => {
     try {
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: process.env.GOOGLE_CLIENT_ID
+            audience:'875738114512-171p73uqojdbmh33fkmv3n9ge1vncjdn.apps.googleusercontent.com'
         });
 
         const payload = ticket.getPayload();
