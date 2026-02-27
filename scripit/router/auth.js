@@ -4,6 +4,7 @@ const User = require('../models/User');
 const { OAuth2Client } = require('google-auth-library');
 const GameState = require('../models/GameState');
 const mongoose = require('mongoose');
+const {application} = require("express");
 
 const router = express.Router();
 
@@ -74,7 +75,7 @@ router.get('/users', async (req, res) => {
 
 
 const client = new OAuth2Client(
-    'process.env.GOOGLE_CLIENT_ID',
+    process.env.GOOGLE_CLIENT_ID,
 );
 
 router.post('/google', async (req, res) => {
@@ -88,7 +89,7 @@ router.post('/google', async (req, res) => {
     try {
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: 'process.env.GOOGLE_CLIENT_ID'
+            audience: process.env.GOOGLE_CLIENT_ID
         });
 
         const payload = ticket.getPayload();
@@ -236,6 +237,6 @@ router.get('/game/history/:userId', async (req, res) => {
 
 
 
-module.exports = router;
+module.exports = application;
 
 
