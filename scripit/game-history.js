@@ -77,7 +77,7 @@ async function createHistoryTable() {
     if (!userId) return;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/auth/game/history/${userId}`);
+        const response = await fetch(`/api/auth/game/history/${userId}`);
         const games = await response.json();
 
         games.forEach(game => {

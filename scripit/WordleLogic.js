@@ -23,7 +23,7 @@ async function saveGame(userId, currentWord, guesses, attemptsLeft, result, time
     if (!userId || userId === "undefined") return;
 
     try {
-        const response = await fetch('http://localhost:3000/api/auth/game/save', {
+        const response = await fetch('/api/auth/game/save', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
