@@ -1,4 +1,4 @@
-# 🎮 Wordle Game – Full Stack MERN App
+🎮 Wordle Game – Full Stack MERN App
 A full-stack, responsive Wordle-inspired word guessing game built with the MERN stack. This project features secure authentication, persistent game state, and a dynamic difficulty system.
 🔗 Quick Links
 •	Live App: Wordle Live Demo
@@ -61,7 +61,8 @@ Difficulty Scaling:
 👩‍💻 Author
 Neha Kondabathini | Adelaide, Australia
 nehakondabathini1234@gmail.com
-<img width="468" height="649" alt="image" src="https://github.com/user-attachments/assets/9bade671-dcc5-4360-b816-824ccb1765cb" />
+
+
 
 
 
