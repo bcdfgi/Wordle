@@ -1,5 +1,5 @@
 
-# 🎮 Wordle Game – Full Stack MERN App
+# 🎮 Wordle Game – Full Stack
 
 A full-stack, responsive Wordle-inspired word guessing game built with the **MERN** stack. This project features secure authentication, persistent game state, and a dynamic difficulty system.
 
@@ -108,6 +108,7 @@ After each guess, the game processes the input against the secret word:
 **Neha Kondabathini** | Adelaide, Australia
 
 [nehakondabathini1234@gmail.com](mailto:nehakondabathini1234@gmail.com)
+
 
 
 
